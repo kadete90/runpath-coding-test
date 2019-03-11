@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RunpathCodingTest.Services;
+using RunpathWebApi.Services;
 
-namespace RunpathCodingTest
+namespace RunpathWebApi
 {
     public class Startup
     {

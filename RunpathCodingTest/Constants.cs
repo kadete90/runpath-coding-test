@@ -1,4 +1,4 @@
-﻿namespace RunpathCodingTest
+﻿namespace RunpathWebApi
 {
     public class Constants
     {

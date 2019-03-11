@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RunpathCodingTest.Models;
-using RunpathCodingTest.Services;
+using RunpathWebApi.Models;
+using RunpathWebApi.Services;
 
-namespace RunpathCodingTest.Controllers
+namespace RunpathWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +25,7 @@ namespace RunpathCodingTest.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get()
         {
-            var albums = await _queryService.GetAllAsync<Album>(Constants.Albums);
+            var albums = await _queryService.GetAllAsync<Album>();
 
             return albums.Any() 
                 ? (IActionResult) Ok(albums) 
@@ -38,7 +38,7 @@ namespace RunpathCodingTest.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int id)
         {
-            var albums = await _queryService.GetAllAsync<Album>($"{Constants.Albums}?id={id}");
+            var albums = await _queryService.GetAllAsync<Album>($"id={id}");
 
             return albums.Any()
                 ? (IActionResult) Ok(albums) 
@@ -51,7 +51,7 @@ namespace RunpathCodingTest.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByUserId(int userId)
         {
-            var albumsByUserId = await _queryService.GetAllAsync<Album>($"{Constants.Albums}?userId={userId}");
+            var albumsByUserId = await _queryService.GetAllAsync<Album>($"userId={userId}");
 
             /* // Different inefficient approach
             var fetchAllAlbums = await _queryService.GetAllAsync<Album>($"{_albumsPrefix}");

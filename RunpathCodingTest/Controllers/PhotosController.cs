@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RunpathCodingTest.Models;
-using RunpathCodingTest.Services;
+using RunpathWebApi.Models;
+using RunpathWebApi.Services;
 
-namespace RunpathCodingTest.Controllers
+namespace RunpathWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +25,7 @@ namespace RunpathCodingTest.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get()
         {
-            var photos = await _queryService.GetAllAsync<Photo>(Constants.Photos);
+            var photos = await _queryService.GetAllAsync<Photo>();
 
             return photos.Any() 
                 ? (IActionResult) Ok(photos) 
@@ -38,7 +38,7 @@ namespace RunpathCodingTest.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Get(int id)
         {
-            var photos = await _queryService.GetAllAsync<Album>($"{Constants.Photos}?id={id}");
+            var photos = await _queryService.GetAllAsync<Album>($"id={id}");
 
             return photos.Any() 
                 ? Ok(photos) 
@@ -51,16 +51,16 @@ namespace RunpathCodingTest.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByUserId(int userId)
         {
-            var albumsByUser = await _queryService.GetAllAsync<Album>($"{Constants.Albums}?userId={userId}");
+            var albumsByUser = await _queryService.GetAllAsync<Album>($"userId={userId}");
 
             if (albumsByUser == null || !albumsByUser.Any())
             {
                 return NotFound();
             }
 
-            var query = $"{Constants.Photos}?albumId={string.Join("&albumId=", albumsByUser.Select(a => a.id))}";
+            var idsQuery = "albumId=" + string.Join("&albumId=", albumsByUser.Select(a => a.id));
 
-            var photos = await _queryService.GetAllAsync<Photo>(query);
+            var photos = await _queryService.GetAllAsync<Photo>(idsQuery);
 
             return photos.Any()
                 ? (IActionResult)Ok(photos)

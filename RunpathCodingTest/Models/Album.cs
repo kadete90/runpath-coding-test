@@ -1,4 +1,4 @@
-﻿namespace RunpathCodingTest.Models
+﻿namespace RunpathWebApi.Models
 {
     public class Album
     {

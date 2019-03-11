@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace RunpathCodingTest
+namespace RunpathWebApi
 {
     public class Program
     {
